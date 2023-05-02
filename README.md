@@ -1,0 +1,1 @@
+Sistema de API para cadastramento e prdoutos e categorias
