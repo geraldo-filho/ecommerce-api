@@ -1,1 +1,1 @@
-Sistema de API para cadastramento e prdoutos e categorias
+Sistema de API para cadastramento e produtos e categorias
