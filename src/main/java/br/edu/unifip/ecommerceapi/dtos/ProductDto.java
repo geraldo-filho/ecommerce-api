@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
 public class ProductDto {
@@ -14,4 +15,10 @@ public class ProductDto {
     private String description;
     @NotNull
     private BigDecimal price;
+    @NotNull
+    private UUID category;
+
+    public UUID getCategory(){
+        return category;
+    }
 }
