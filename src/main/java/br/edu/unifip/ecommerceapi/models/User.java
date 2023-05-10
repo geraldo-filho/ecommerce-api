@@ -24,4 +24,7 @@ public class User implements Serializable {
     private int age;
     @Column(nullable = false)
     private boolean active;
+
+    @Column(nullable = false, length = 64)
+    private String image;
 }

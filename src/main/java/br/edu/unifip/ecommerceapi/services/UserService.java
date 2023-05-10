@@ -3,7 +3,6 @@ package br.edu.unifip.ecommerceapi.services;
 import br.edu.unifip.ecommerceapi.models.User;
 import br.edu.unifip.ecommerceapi.repositories.UserRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
@@ -30,7 +29,6 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    @Transactional
 
     public User save(User user){
         return userRepository.save(user);

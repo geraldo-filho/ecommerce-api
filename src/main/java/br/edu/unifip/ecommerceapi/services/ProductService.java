@@ -19,7 +19,7 @@ public class ProductService {
     final ProductRepository productRepository;
     final CategoryService categoryService;
 
-    public ProductService(ProductRepository productRepository, CategoryService categoryService, CategoryService categoryService1){
+    public ProductService(ProductRepository productRepository, CategoryService categoryService){
         this.productRepository = productRepository;
         this.categoryService = categoryService;
     }
@@ -50,31 +50,31 @@ public class ProductService {
 
     public Product partialUpdate(Product product, Map<Object, Object> objectMap) {
         if (objectMap.containsKey("category")){
-            UUID categoryId = (UUID) objectMap.get("category");
-            Category category = categoryService.findById(categoryId)
+            String categoryId = (String) objectMap.get("category");
+            Category category = categoryService.findById(UUID.fromString(categoryId))
                     .orElseThrow(() -> new RuntimeException("Category not found"));
             product.setCategory(category);
             objectMap.remove("category");
         }
-        objectMap.forEach((key, valeu) -> {
+        objectMap.forEach((key, value) -> {
             Field field = ReflectionUtils.findField(Product.class, (String) key);
             field.setAccessible(true);
 
             try {
-                valeu = BigDecimal.valueOf((double) valeu);
+                value = BigDecimal.valueOf((double) value);
             } catch (ClassCastException ignored) {
             }
-            ReflectionUtils.setField(field, product, valeu);
+            ReflectionUtils.setField(field, product, value);
         });
         return productRepository.save(product);
     }
 
-    public List<Product> findByActiveTrue(){
-        return productRepository.findByActiveTrue();
-    }
+    /*public List<Product> findByActiveTrue(){
+       return productRepository.findByActiveTrue;
+    }*/
 
     public List<Product> findByName(String name){
-        return productRepository.findByName();
+        return productRepository.findByName(name);
     }
 
     public List<Product> findByCategoryName(String name){
